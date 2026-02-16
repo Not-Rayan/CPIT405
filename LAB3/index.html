@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Lab 3 - HTML Basics</title>
+
+  <style>
+    /* Task 1: Colored borders around the image (like the lab picture) */
+    .image-preview img {
+      padding: 15px;
+      border-style: solid;
+      border-width: 30px;
+      border-top-color: skyblue;      /* top */
+      border-right-color: lightpink;  /* right */
+      border-bottom-color: lightgreen;/* bottom */
+      border-left-color: #ffefd5;     /* left */
+    }
+
+    /* Task 2: CSS rules from the lab */
+    p > span { color: red; }
+    #header span { color: pink; }
+    span { color: green; }
+    #header *:last-child { color: orange; }
+    #header span:first-child:hover { color: blue; }
+
+    /* Table styling (grid like the example image) */
+    table.grid {
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-family: "Times New Roman", serif;
+      font-size: 22px;
+    }
+
+    table.grid th,
+    table.grid td {
+      border: 2px solid #000;
+      padding: 6px 10px;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    table.grid th {
+      font-weight: bold;
+    }
+
+    /* Words after table */
+.color-word {
+  color: black;
+  font-size: 22px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+/* Hover colors */
+.red:hover {
+  color: red;
+}
+
+.blue:hover {
+  color: blue;
+}
+
+.green:hover {
+  color: green;
+}
+
+  </style>
+</head>
+
+<body>
+  <h1>Lab 3 - HTML Basics</h1>
+
+  <p>This is a simple HTML page for Lab 3 at FCIT - King Abdulaziz University.</p>
+
+  <h2>University Logo</h2>
+  <div class="image-preview">
+    <img
+      src="https://cpit405.gitlab.io/images/KAU_logo.png"
+      alt="KAU Logo"
+      width="200"
+    />
+  </div>
+
+  <hr />
+
+ 
+
+  <h2>The table Table</h2>
+  <table class="grid">
+    <tr>
+      <th>Name</th>
+      <th>color</th>
+      <th>color when mouse over</th>
+    </tr>
+
+    <tr>
+      <td>span.myclass1</td>
+      <td>pink</td>
+      <td>blue</td>
+    </tr>
+
+    <tr>
+      <td>span.myclass2</td>
+      <td>pink</td>
+      <td>pink</td>
+    </tr>
+
+    <tr>
+      <td>span.myclass3</td>
+      <td>orange</td>
+      <td>orange</td>
+    </tr>
+
+    <tr>
+      <td>span.myclass4</td>
+      <td>red</td>
+      <td>red</td>
+    </tr>
+  </table>
+
+  <br><br>
+
+<span class="color-word red">Red</span>
+<span class="color-word blue">Blue</span>
+<span class="color-word green">Green</span>
+
+</body>
+</html>
