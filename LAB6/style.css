@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+    margin-top: 50px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+#like, #dislike {
+    font-size: 300px;
+    padding: 20px 40px;
+    margin: 10px;
+    border-radius: 10px;        
+    border: 1px solid #ccc;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#likeBtn, #dislikeBtn {
+    font-size: 50px;
+    /* padding: 20px 40px;
+    margin: 10px;
+    border-radius: 10px;        
+    border: 1px solid #ccc;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: 0.3s; */
+}
+
+#like:hover, #dislike:hover {
+    background-color: #ccc;
+}
+
+textarea {
+    width: 60%;
+    height: 120px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+}
+
+#submitComment, #clear {
+    margin: 20px 10px;
+    padding: 10px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#submitComment:hover, #clear:hover {
+    background-color: #333;
+}
+
+/* button:last-child {
+    display: block;
+    margin: 20px auto;
+    background-color: #777;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+} */
+
+#commentsList {
+    width: 60%;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.comment-item {
+    background: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.liked {
+    background-color: green !important;
+    color: white;
+}
+
+.disliked {
+    background-color: red !important;
+    color: white;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+#alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+#alert.show {
+    opacity: 1;
+}

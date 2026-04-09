@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<h1>Lab 6</h1>
+<h2>Like or dislike</h2>
+
+<button id="likeBtn" onclick="vote('like')">
+    👍 <span id="likeCount">0</span>
+</button>
+
+<button id="dislikeBtn" onclick="vote('dislike')">
+    👎 <span id="dislikeCount">0</span>
+</button>
+
+<p id="votedNotice"></p>
+
+<h3>Comments</h3>
+
+<textarea id="commentInput" placeholder="ايش تفكر فيه؟"></textarea>
+
+<br>
+
+<button id="submitComment" onclick="submitComment()">Submit</button>
+<button id="clear" onclick="clearInput()">Clear</button>
+
+<div id="commentsList"></div>
+
+<button onclick="resetAll()">Reset</button>
+
+<div id="alert"></div>
+
+</body>
+</html>
