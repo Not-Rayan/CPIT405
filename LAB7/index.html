@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayan Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Rayan Gallery</h1>
+        <div class="subtitle">Discover beautiful images</div>
+    </header>
+
+    <div class="controls">
+        <div class="search-row">
+            <input type="text" id="search-query" placeholder="Search...">
+        </div>
+        <div class="btn-group">
+            <button onclick="searchWithXHR()">Search (XHR)</button>
+            <button onclick="searchWithPromises()">Search (Promises)</button>
+            <button onclick="searchWithAsync()">Search (Async/Await)</button>
+        </div>
+    </div>
+
+    <div class="section-title">Search Results</div>
+    <div id="image-container">
+        <div class="empty-state">Search for something to see results!</div>
+    </div>
+
+    <div class="section-title">Favorite Photos ❤️</div>
+    <div id="favorites-container">
+        <div class="empty-state">No favorite photos yet. Click the heart to save!</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
