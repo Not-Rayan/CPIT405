@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rayan - My Works</title>
+    <!-- Link to the shared portfolio stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Responsive grid: cards wrap automatically on smaller screens */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        /* Individual project card */
+        .work-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* Lift effect on hover */
+        .work-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(56, 106, 53, 0.14);
+        }
+
+        /* Open App button at the bottom of each card */
+        .btn-open {
+            display: block;
+            text-align: center;
+            background-color: #386A35;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-open:hover {
+            background-color: #2b5028;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Site Header & Navigation ===== -->
+    <header>
+        <h1 id="MyName">Rayan Al-Qarni</h1>
+        <nav>
+            <a class="AHeader" href="index.html">Home</a>
+            <a class="AHeader" href="labs.html">Labs</a>
+            <a class="AHeader" href="myworks.html">My Works</a>
+            <a class="AHeader" href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- ===== Sidebar ===== -->
+            <aside class="sidebar">
+                <img src="image\myphoto.jpg" alt="My Photo">
+
+                <h3 class="sidebar-heading">Quick Links</h3>
+                <div class="divider"></div>
+                <a href="index.html#about">About Me</a>
+                <a href="index.html#education">Education</a>
+                <a href="index.html#skills">Skills</a>
+
+                <h3 class="sidebar-heading">Portfolio Links</h3>
+                <div class="divider"></div>
+                <div class="portfolio-links">
+                    <a href="https://www.linkedin.com/in/rayan-al-qarni-8b777432b/" target="_blank">View CV Page</a>
+                    <a href="labs.html">View Labs</a>
+                    <a href="contact.html">Open Contact Page</a>
+                    <a href="https://github.com/Not-Rayan" target="_blank">GitHub Profile</a>
+                </div>
+            </aside>
+
+            <!-- ===== Main Content ===== -->
+            <div class="content">
+                <h2>My Works</h2>
+
+                <!-- Grid of project cards -->
+                <div class="works-grid">
+
+                    <!-- App 1: To-Do List (no external API) -->
+                    <div class="work-card">
+                        <h3>To-Do List App</h3>
+                        <p>An interactive to-do list built with vanilla JavaScript. Tasks are saved in the browser using localStorage so they persist between visits.</p>
+                        <a class="btn-open" href="app1.html">Open App</a>
+                    </div>
+
+                    <!-- App 2: Country Explorer (uses REST Countries public API) -->
+                    <div class="work-card">
+                        <h3>Country Explorer</h3>
+                        <p>Search and explore countries using the REST Countries public API. Displays flag, capital, region, population, and languages for each result.</p>
+                        <a class="btn-open" href="app2.html">Open App</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright 2024 Rayan</p>
+    </footer>
+
+</body>
+</html>

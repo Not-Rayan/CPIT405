@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rayan - Contact</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>  
+   <header>
+     <h1 id="MyName">Rayan Al-Qarni</h1>
+     <nav>
+       <a class="AHeader" href="index.html">Home</a>
+       <a class="AHeader" href="labs.html">Labs</a>
+       <a class="AHeader" href="myworks.html">My Works</a>
+       <a class="AHeader" href="contact.html">Contact</a>
+     </nav>
+   </header>
+
+<main>
+    <div class="container">
+
+        <aside class="sidebar">
+            <img src="image\myphoto.jpg" alt="My Photo">
+            
+            <h3 class="sidebar-heading">Contact Info</h3>
+            <div class="divider"></div>
+            
+            <div class="sidebar-contact-info">
+                <p style="text-align: center; color: #666;">Email:</p>
+                <a href="mailto:rayan.alqarni.official@gmail.com" style="background:none; color:#386A35; font-weight:normal; padding:0; display:block; text-align:center;">rayan.alqarni.official@gmail.com</a>
+                
+                <p style="text-align: center; color: #666; margin-top:15px;">Phone: <span style="color:#386A35;">0532253433</span></p>
+                
+                <div class="sidebar-contact-icons">
+                    <a href="https://github.com/Not-Rayan" target="_blank" title="GitHub" style="background:none;">
+                        <svg height="32" viewBox="0 0 16 16" width="32" fill="#000"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rayan-al-qarni-8b777432b/" target="_blank" title="LinkedIn" style="background:none;">
+                        <svg height="32" viewBox="0 0 16 16" width="32" fill="#0077b5"><path d="M14.82 0H1.18A1.17 1.17 0 000 1.15v13.7A1.17 1.17 0 001.18 16h13.64A1.18 1.18 0 0016 14.85V1.15A1.18 1.18 0 0014.82 0zM4.74 13.92H2.33V5.98h2.41v7.94zM3.54 4.88a1.4 1.4 0 110-2.8 1.4 1.4 0 010 2.8zM13.92 13.92h-2.41V10c0-.94 0-2.14-1.3-2.14-1.3 0-1.5 1.02-1.5 2.07v4H6.3V5.98h2.32v1.08h.03a2.54 2.54 0 012.3-1.26c2.45 0 2.9 1.6 2.9 3.69v4.43z"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <div class="content">
+
+            <section id="contact-form-section">
+                <h2>Contact Me</h2>
+                
+                <form class="contact-form" action="#" method="get">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label>Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    
+                    <div class="radio-group">
+                        <span style="font-size: 14px; margin-right:5px;">Message Type: </span>
+                        <label>
+                            <input type="radio" name="msg_type" value="inquiry" checked> Inquiry
+                        </label>
+                        <label>
+                            <input type="radio" name="msg_type" value="feedback"> Feedback
+                        </label>
+                    </div>
+                    
+                    <button type="submit">Send</button>
+                </form>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+   <footer>
+     <p>Copyright 2024 Rayan</p>    
+    </footer>
+
+</body>
+</html>

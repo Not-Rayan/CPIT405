@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rayan - To-Do List</title>
+    <!-- Link to the shared portfolio stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Wrapper to limit the to-do area width */
+        .todo-container {
+            max-width: 600px;
+        }
+
+        /* Row that holds the text input and the Add button side by side */
+        .todo-input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the task input field */
+        .todo-input-row input[type="text"] {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #8ab887;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        /* Highlight input border when the user clicks on it */
+        .todo-input-row input[type="text"]:focus {
+            border-color: #386A35;
+            box-shadow: 0 0 5px rgba(56, 106, 53, 0.4);
+        }
+
+        /* Green Add button */
+        .btn-add {
+            background-color: #386A35;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* Darker shade on hover */
+        .btn-add:hover {
+            background-color: #2b5028;
+        }
+
+        /* Remove default list bullets and spacing */
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Each task row */
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            transition: background-color 0.2s;
+        }
+
+        /* Light green background when hovering a task */
+        .todo-item:hover {
+            background-color: #f4f9f4;
+        }
+
+        /* Checkbox styling */
+        .todo-item input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: #386A35;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        /* Task text label */
+        .todo-item span {
+            flex: 1;
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* Strike-through text for completed tasks */
+        .todo-item.done span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        /* The × delete button on the right of each task */
+        .btn-delete {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 20px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 4px;
+            transition: color 0.2s;
+        }
+
+        /* Red color on hover to warn the user */
+        .btn-delete:hover {
+            color: #c0392b;
+        }
+
+        /* Footer row: task counter on the left, clear button on the right */
+        .todo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* "Clear completed" button — subtle style */
+        .btn-clear {
+            background: none;
+            border: 1px solid #ccc;
+            color: #666;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-clear:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Message shown when there are no tasks */
+        .empty-msg {
+            text-align: center;
+            color: #aaa;
+            font-style: italic;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        /* Small descriptive text in the sidebar */
+        .about-app-note {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Site Header & Navigation ===== -->
+    <header>
+        <h1 id="MyName">Rayan Al-Qarni</h1>
+        <nav>
+            <a class="AHeader" href="index.html">Home</a>
+            <a class="AHeader" href="labs.html">Labs</a>
+            <a class="AHeader" href="myworks.html">My Works</a>
+            <a class="AHeader" href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- ===== Sidebar ===== -->
+            <aside class="sidebar">
+                <img src="image\myphoto.jpg" alt="My Photo">
+
+                <h3 class="sidebar-heading">About This App</h3>
+                <div class="divider"></div>
+                <p class="about-app-note">
+                    A simple To-Do List app built with HTML, CSS, and JavaScript.<br><br>
+                    Your tasks are saved in your browser using <strong>localStorage</strong> — they will still be here when you come back.
+                </p>
+
+                <h3 class="sidebar-heading">Portfolio Links</h3>
+                <div class="divider"></div>
+                <div class="portfolio-links">
+                    <a href="myworks.html">← My Works</a>
+                    <a href="app2.html">View App 2</a>
+                </div>
+            </aside>
+
+            <!-- ===== Main Content ===== -->
+            <div class="content">
+                <h2>To-Do List</h2>
+
+                <div class="todo-container">
+
+                    <!-- Input row: text field + Add button -->
+                    <div class="todo-input-row">
+                        <input type="text" id="taskInput" placeholder="Add a new task..." />
+                        <button class="btn-add" onclick="addTask()">Add</button>
+                    </div>
+
+                    <!-- List of tasks will be injected here by JavaScript -->
+                    <ul class="todo-list" id="todoList"></ul>
+
+                    <!-- Shown only when the list is empty -->
+                    <p class="empty-msg" id="emptyMsg">No tasks yet. Add one above!</p>
+
+                    <!-- Footer: task counter + clear button -->
+                    <div class="todo-footer">
+                        <span id="taskCount">0 of 0 completed</span>
+                        <button class="btn-clear" onclick="clearCompleted()">Clear completed</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright 2024 Rayan</p>
+    </footer>
+
+    <script>
+        // Load saved tasks from localStorage, or start with an empty array
+        let tasks = JSON.parse(localStorage.getItem('rayan_tasks')) || [];
+
+        // Save the current tasks array to localStorage as a JSON string
+        function saveTasks() {
+            localStorage.setItem('rayan_tasks', JSON.stringify(tasks));
+        }
+
+        // Re-draw the entire task list on the page
+        function renderTasks() {
+            const list = document.getElementById('todoList');
+            const emptyMsg = document.getElementById('emptyMsg');
+            const taskCount = document.getElementById('taskCount');
+
+            // Clear existing list items before re-rendering
+            list.innerHTML = '';
+
+            // Show or hide the empty-state message
+            if (tasks.length === 0) {
+                emptyMsg.style.display = 'block';
+            } else {
+                emptyMsg.style.display = 'none';
+            }
+
+            let completed = 0;
+
+            // Loop over every task and build its HTML elements
+            tasks.forEach((task, index) => {
+                if (task.done) completed++;
+
+                // Create the <li> element and apply 'done' class if task is finished
+                const li = document.createElement('li');
+                li.className = 'todo-item' + (task.done ? ' done' : '');
+
+                // Checkbox to toggle completion status
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = task.done;
+                checkbox.onchange = () => toggleTask(index);
+
+                // Text label for the task
+                const span = document.createElement('span');
+                span.textContent = task.text;
+
+                // Delete (×) button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn-delete';
+                deleteBtn.innerHTML = '&times;';
+                deleteBtn.title = 'Delete task';
+                deleteBtn.onclick = () => deleteTask(index);
+
+                // Assemble the list item
+                li.appendChild(checkbox);
+                li.appendChild(span);
+                li.appendChild(deleteBtn);
+                list.appendChild(li);
+            });
+
+            // Update the "X of Y completed" counter
+            taskCount.textContent = completed + ' of ' + tasks.length + ' completed';
+        }
+
+        // Add a new task from the input field
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            const text = input.value.trim();
+
+            // Do nothing if the input is empty
+            if (!text) return;
+
+            tasks.push({ text: text, done: false });
+            saveTasks();
+            renderTasks();
+
+            // Clear the input and keep focus for quick entry
+            input.value = '';
+            input.focus();
+        }
+
+        // Toggle the done/undone state of a task by its index
+        function toggleTask(index) {
+            tasks[index].done = !tasks[index].done;
+            saveTasks();
+            renderTasks();
+        }
+
+        // Remove a single task by its index
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        }
+
+        // Remove all tasks that are marked as done
+        function clearCompleted() {
+            tasks = tasks.filter(t => !t.done);
+            saveTasks();
+            renderTasks();
+        }
+
+        // Allow pressing Enter to quickly add a task without clicking the button
+        document.getElementById('taskInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') addTask();
+        });
+
+        // Render tasks immediately when the page loads
+        renderTasks();
+    </script>
+
+</body>
+</html>

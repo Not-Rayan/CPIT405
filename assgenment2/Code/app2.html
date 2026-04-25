@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rayan - Country Explorer</title>
+    <!-- Link to the shared portfolio stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Search bar row: input + button side by side */
+        .search-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        /* Style for the search text input */
+        .search-row input[type="text"] {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #8ab887;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        /* Highlight input border on focus */
+        .search-row input[type="text"]:focus {
+            border-color: #386A35;
+            box-shadow: 0 0 5px rgba(56, 106, 53, 0.4);
+        }
+
+        /* Green Search button */
+        .btn-search {
+            background-color: #386A35;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-search:hover {
+            background-color: #2b5028;
+        }
+
+        /* Small text showing how many results were found */
+        .results-info {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 14px;
+        }
+
+        /* Responsive grid for country cards */
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        /* Individual country card */
+        .country-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* Lift effect on hover */
+        .country-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(56, 106, 53, 0.15);
+        }
+
+        /* Country flag image at the top of the card */
+        .country-card img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+            display: block;
+        }
+
+        /* Padding wrapper for the text details */
+        .country-info {
+            padding: 10px;
+        }
+
+        /* Bold country name */
+        .country-name {
+            font-weight: bold;
+            font-size: 14px;
+            color: #2b5028;
+            margin-bottom: 6px;
+        }
+
+        /* Each detail row (capital, region, population, language) */
+        .country-detail {
+            font-size: 12px;
+            color: #555;
+            margin: 3px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        /* Prevent emoji icons from wrapping */
+        .country-detail .icon {
+            flex-shrink: 0;
+        }
+
+        /* Loading & error states */
+        .state-msg {
+            text-align: center;
+            padding: 40px 0;
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* Error message in red */
+        .state-msg.error {
+            color: #c0392b;
+        }
+
+        /* CSS-only spinning loader animation */
+        .spinner {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border: 3px solid #d0e8cf;
+            border-top-color: #386A35;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Small sidebar description text */
+        .about-app-note {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Site Header & Navigation ===== -->
+    <header>
+        <h1 id="MyName">Rayan Al-Qarni</h1>
+        <nav>
+            <a class="AHeader" href="index.html">Home</a>
+            <a class="AHeader" href="labs.html">Labs</a>
+            <a class="AHeader" href="myworks.html">My Works</a>
+            <a class="AHeader" href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- ===== Sidebar ===== -->
+            <aside class="sidebar">
+                <img src="image\myphoto.jpg" alt="My Photo">
+
+                <h3 class="sidebar-heading">About This App</h3>
+                <div class="divider"></div>
+                <p class="about-app-note">
+                    Search and explore countries using the REST Countries API.<br><br>
+                    Data is fetched live from <strong>restcountries.com</strong>.
+                </p>
+
+                <h3 class="sidebar-heading">Portfolio Links</h3>
+                <div class="divider"></div>
+                <div class="portfolio-links">
+                    <a href="myworks.html">← My Works</a>
+                    <a href="app1.html">View App 1</a>
+                </div>
+            </aside>
+
+            <!-- ===== Main Content ===== -->
+            <div class="content">
+                <h2>Country Explorer</h2>
+
+                <!-- Search input + button -->
+                <div class="search-row">
+                    <input type="text" id="searchInput" placeholder="Search for a country..." />
+                    <button class="btn-search" onclick="searchCountries()">Search</button>
+                </div>
+
+                <!-- Shows "X results found" after a search -->
+                <div class="results-info" id="resultsInfo"></div>
+
+                <!-- Country cards will be injected here by JavaScript -->
+                <div id="resultsContainer"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright 2024 Rayan</p>
+    </footer>
+
+    <script>
+        // Cache DOM references so we don't query them on every function call
+        const searchInput = document.getElementById('searchInput');
+        const resultsInfo = document.getElementById('resultsInfo');
+        const resultsContainer = document.getElementById('resultsContainer');
+
+        // Show a spinning loader while waiting for the API response
+        function showLoading() {
+            resultsInfo.textContent = '';
+            resultsContainer.innerHTML = `
+                <div class="state-msg">
+                    <div class="spinner"></div>
+                    <p>Searching...</p>
+                </div>`;
+        }
+
+        // Display an error message if the fetch fails
+        function showError(msg) {
+            resultsInfo.textContent = '';
+            resultsContainer.innerHTML = `<div class="state-msg error">⚠️ ${msg}</div>`;
+        }
+
+        // Build and insert the grid of country cards from the API data array
+        function renderCountries(countries) {
+
+            // Handle the case where the API returned no matches
+            if (countries.length === 0) {
+                resultsInfo.textContent = '';
+                resultsContainer.innerHTML = `<div class="state-msg">No countries found. Try a different name.</div>`;
+                return;
+            }
+
+            // Show the result count above the grid
+            resultsInfo.textContent = countries.length + ' result' + (countries.length !== 1 ? 's' : '') + ' found';
+
+            // Create the grid container
+            const grid = document.createElement('div');
+            grid.className = 'countries-grid';
+
+            // Loop through each country and build a card
+            countries.forEach(country => {
+                // Safely extract fields; fall back to 'N/A' if missing
+                const name       = country.name?.common || 'Unknown';
+                const flag       = country.flags?.png   || '';
+                const capital    = country.capital      ? country.capital[0] : 'N/A';
+                const region     = country.region       || 'N/A';
+                const population = country.population   ? country.population.toLocaleString() : 'N/A';
+
+                // Show up to 2 languages to keep the card compact
+                const languages  = country.languages
+                    ? Object.values(country.languages).slice(0, 2).join(', ')
+                    : 'N/A';
+
+                // Build the card element using a template literal
+                const card = document.createElement('div');
+                card.className = 'country-card';
+                card.innerHTML = `
+                    <img src="${flag}" alt="Flag of ${name}" loading="lazy">
+                    <div class="country-info">
+                        <div class="country-name">${name}</div>
+                        <div class="country-detail"><span class="icon">🏛</span> ${capital}</div>
+                        <div class="country-detail"><span class="icon">🌍</span> ${region}</div>
+                        <div class="country-detail"><span class="icon">👥</span> ${population}</div>
+                        <div class="country-detail"><span class="icon">🗣</span> ${languages}</div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+
+            // Replace any previous results with the new grid
+            resultsContainer.innerHTML = '';
+            resultsContainer.appendChild(grid);
+        }
+
+        // Main search function — fetches data from the REST Countries API
+        async function searchCountries() {
+            const query = searchInput.value.trim();
+
+            // Do nothing if the search box is empty
+            if (!query) return;
+
+            showLoading();
+
+            try {
+                // Fetch matching countries by name from the public REST Countries API
+                const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(query)}`);
+
+                // 404 means no countries matched — show empty state instead of an error
+                if (response.status === 404) {
+                    renderCountries([]);
+                    return;
+                }
+
+                // Any other non-OK status is an unexpected server error
+                if (!response.ok) {
+                    throw new Error('Server error: ' + response.status);
+                }
+
+                // Parse the JSON response and render the cards
+                const data = await response.json();
+                renderCountries(data);
+
+            } catch (err) {
+                // TypeError usually means the user is offline or the URL is wrong
+                if (err.name === 'TypeError') {
+                    showError('Network error. Please check your internet connection.');
+                } else {
+                    showError(err.message || 'Something went wrong. Please try again.');
+                }
+            }
+        }
+
+        // Allow pressing Enter to trigger the search without clicking the button
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') searchCountries();
+        });
+    </script>
+
+</body>
+</html>
