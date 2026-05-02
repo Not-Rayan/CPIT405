@@ -1,30 +1,25 @@
 import { useState } from 'react'
 
 function Home() {
-  // useState لتخزين قيم الـ inputs والنتيجة
   const [longUrl, setLongUrl] = useState('')
   const [shortCode, setShortCode] = useState('')
   const [result, setResult] = useState('')
   const [error, setError] = useState('')
 
   const handleShorten = () => {
-    // إعادة تعيين الأخطاء السابقة
     setError('')
     setResult('')
 
-    // التحقق من أن الحقول مش فارغة
     if (!longUrl || !shortCode) {
       setError('Please fill in all fields!')
       return
     }
 
-    // التحقق أن الرابط يبدأ بـ http أو https
     if (!longUrl.startsWith('http://') && !longUrl.startsWith('https://')) {
       setError('Please enter a valid URL starting with http:// or https://')
       return
     }
 
-    // بناء الرابط المختصر
     setResult(`https://cpt405.co/${shortCode}`)
   }
 
@@ -35,7 +30,6 @@ function Home() {
     setError('')
   }
 
-  // Styles
   const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
@@ -128,7 +122,6 @@ function Home() {
       <div style={cardStyle}>
         <h2 style={titleStyle}>Link Shrinker</h2>
 
-        {/* Long URL Input */}
         <label style={labelStyle}>Long URL:</label>
         <input
           type="text"
@@ -138,7 +131,6 @@ function Home() {
           style={inputStyle}
         />
 
-        {/* Short Code Input */}
         <label style={labelStyle}>Enter short code:</label>
         <input
           type="text"
@@ -148,15 +140,12 @@ function Home() {
           style={inputStyle}
         />
 
-        {/* Error Message */}
         {error && <p style={errorStyle}>{error}</p>}
 
-        {/* Shorten Button */}
         <button style={buttonStyle} onClick={handleShorten}>
           Shorten
         </button>
 
-        {/* Result */}
         {result && (
           <div>
             <label style={labelStyle}>Short URL</label>
